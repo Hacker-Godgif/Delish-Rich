@@ -1,71 +1,297 @@
-# Delish Rich — Local Edition
+# 🏡 Delish Rich Hospitality
 
-Self-contained Node + MongoDB + React version of the website. Runs entirely on your laptop.
+A modern full-stack web application for showcasing premium interior, furniture, and hospitality projects.
 
-## Stack
+Built with **React**, **Vite**, **Node.js**, **Express**, and **MongoDB**, the platform allows customers to explore products and completed projects while providing an admin dashboard for content management.
 
-- **Backend:** Node.js, Express, Mongoose (MongoDB), Multer (file uploads)
-- **Frontend:** React 18 + Vite + React Router
-- **Database:** MongoDB (local or Atlas — your choice)
-- **Storage:** Local filesystem (`server/uploads/`)
+---
 
-## One-time setup
+## 📸 Preview
 
-### 1. Install Node.js (>=18) and MongoDB
+> Add screenshots here after deployment
 
-- **Node:** https://nodejs.org (LTS)
-- **MongoDB Community (local):** https://www.mongodb.com/try/download/community
-  Start it: `mongod` (Mac/Linux) or run as a Windows service.
-- **Or MongoDB Atlas (free cloud, no install):** https://www.mongodb.com/atlas — create a free cluster, get the connection string.
+| Home | Catalogue | Projects |
+|------|-----------|----------|
+| Screenshot | Screenshot | Screenshot |
 
-### 2. Backend
+---
+
+# ✨ Features
+
+## Customer
+
+- 🏠 Modern responsive landing page
+- 🛋 Browse product catalogue
+- 🔍 Product detail page
+- 🏗 View completed projects
+- 📩 Contact / Inquiry form
+- 📱 Fully responsive design
+- ⚡ Fast loading using Vite
+
+---
+
+## Admin
+
+- Secure Admin Login
+- Product Management
+- Project Management
+- Bulk Image Upload
+- CSV Product Import
+- JWT Authentication
+- Image Gallery Management
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- React
+- Vite
+- React Router
+- JavaScript (ES6+)
+- CSS3
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Multer
+- Cloudinary
+
+---
+
+## Deployment
+
+- Frontend → Vercel
+- Backend → Railway
+- Database → MongoDB Atlas
+- Images → Cloudinary
+
+---
+
+# 📂 Project Structure
+
+```
+Delish-Rich/
+│
+├── web/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── config/
+│   │   ├── pages/
+│   │   └── main.jsx
+│   │
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.js
+│
+├── server/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── config/
+│   │   ├── app.js
+│   │   └── server.js
+│   │
+│   ├── package.json
+│   └── .env
+│
+└── README.md
+```
+
+---
+
+# 🚀 Getting Started
+
+## Clone Repository
 
 ```bash
-cd local-app/server
+git clone https://github.com/yourusername/delish-rich.git
+
+cd delish-rich
+```
+
+---
+
+# Install Frontend
+
+```bash
+cd web
+
 npm install
-cp .env.example .env
-# edit .env if you want to change MONGO_URI or ADMIN_TOKEN
+```
+
+Run
+
+```bash
 npm run dev
 ```
 
-API runs on http://localhost:4000
+---
 
-### 3. Frontend
-
-In a second terminal:
+# Install Backend
 
 ```bash
-cd local-app/web
+cd server
+
 npm install
+```
+
+Run
+
+```bash
 npm run dev
 ```
 
-Site runs on http://localhost:5173
+---
 
-### 4. (Optional) Seed sample data
+# Environment Variables
 
-```bash
-cd local-app/server
-npm run seed
-```
+## Frontend
 
-## Admin panel
-
-Open http://localhost:5173/admin — paste the `ADMIN_TOKEN` from your `.env` to unlock.
-
-You can:
-- Add / edit / delete products and projects
-- Drag-and-drop a whole folder of images to bulk upload
-- Import a CSV of products
-
-## Deploying later
-
-Any Node host works: Railway, Render, Fly, your own VPS. Point `MONGO_URI` at MongoDB Atlas, build the frontend (`npm run build` in `web/`), and serve the `web/dist` from Express (or any static host).
-
-## Folder layout
+Create
 
 ```
-local-app/
-  server/   Express + Mongo API
-  web/      React + Vite frontend
+web/.env.development
 ```
+
+```env
+VITE_API_BASE=http://localhost:5000/api
+```
+
+Create
+
+```
+web/.env.production
+```
+
+```env
+VITE_API_BASE=https://api.yourdomain.com/api
+```
+
+---
+
+## Backend
+
+Create
+
+```
+server/.env
+```
+
+```env
+PORT=5000
+
+MONGODB_URI=
+
+JWT_SECRET=
+
+CLOUDINARY_CLOUD_NAME=
+
+CLOUDINARY_API_KEY=
+
+CLOUDINARY_API_SECRET=
+```
+
+---
+
+# API Modules
+
+The frontend uses a modular API layer.
+
+```
+api/
+│
+├── client.js
+├── auth.js
+├── products.js
+├── projects.js
+├── categories.js
+├── inquiries.js
+├── uploads.js
+└── index.js
+```
+
+---
+
+# Future Improvements
+
+- Product Search
+- Product Filtering
+- Wishlist
+- Image Optimization
+- Analytics Dashboard
+- Pagination
+- Order Management
+- Inventory Management
+- Email Notifications
+- Payment Gateway Integration
+
+---
+
+# Deployment
+
+Frontend
+
+```
+Vercel
+```
+
+Backend
+
+```
+Railway
+```
+
+Database
+
+```
+MongoDB Atlas
+```
+
+Domain
+
+```
+https://yourdomain.com
+```
+
+API
+
+```
+https://api.yourdomain.com
+```
+
+---
+
+# Contributing
+
+Contributions, issues, and feature requests are welcome.
+
+Feel free to fork this repository and submit a pull request.
+
+---
+
+# License
+
+This project is licensed under the MIT License.
+
+---
+
+# Author
+
+**Om Sinha**
+
+GitHub: https://github.com/Hacker-Godgif
+
+LinkedIn: https://linkedin.com/in/yourprofile
