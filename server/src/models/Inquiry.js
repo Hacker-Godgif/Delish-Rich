@@ -1,14 +1,64 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const InquirySchema = new mongoose.Schema(
   {
-    name: String,
-    email: String,
-    phone: String,
-    company: String,
-    message: String,
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: 100,
+    },
+
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+      match: /^\S+@\S+\.\S+$/,
+    },
+
+    phone: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    company: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    message: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: 2000,
+    },
+
+    status: {
+      type: String,
+      enum: [
+        "new",
+        "contacted",
+        "in-progress",
+        "resolved",
+        "closed",
+      ],
+      default: "new",
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+
+    toJSON: {
+      virtuals: true,
+    },
+
+    toObject: {
+      virtuals: true,
+    },
+  }
 );
 
-export default mongoose.model('Inquiry', InquirySchema);
+export default mongoose.model("Inquiry", InquirySchema);
