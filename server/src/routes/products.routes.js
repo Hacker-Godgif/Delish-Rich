@@ -1,12 +1,7 @@
 import { Router } from "express";
-
 import { requireAdmin } from "../middleware/auth.js";
 import upload from "../middleware/upload.js";
-
-import {
-  createProduct,
-  getProducts,
-  getProductBySlug,
+import {createProduct,getProducts,getProductBySlug,getProductById,
   updateProduct,
   deleteProduct,
 } from "../controllers/product.controller.js";
@@ -21,6 +16,9 @@ import { validate } from "../middleware/validate.js";
 const router = Router();
 
 router.get("/", getProducts);
+router.get("/id/:id", getProductById);
+
+
 
 router.get("/:slug", getProductBySlug);
 

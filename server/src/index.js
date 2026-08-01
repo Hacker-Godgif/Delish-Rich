@@ -12,11 +12,25 @@ import inquiries from './routes/inquiries.routes.js';
 // import bulkImport from './routes/bulkImport.js';
 import authRoutes from "./routes/auth.routes.js";
 import errorHandler from "./middleware/errorHandler.js";
-
+import helmet from "helmet";
+import morgan from "morgan";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
+app.use(helmet());
+app.use(morgan("dev"));
 
 app.use(cors());
+
+app.use(
+  cors({
+    origin: [
+      "https://delishrich.com",
+      "https://admin.delishrich.com",
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json({ limit: '10mb' }));
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 

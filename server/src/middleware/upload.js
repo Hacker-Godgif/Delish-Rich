@@ -26,11 +26,6 @@ const storage = multer.diskStorage({
 
 // File filter
 const fileFilter = (req, file, cb) => {
-  console.log("========== FILE DEBUG ==========");
-  console.log("Original Name:", file.originalname);
-  console.log("Mime Type:", file.mimetype);
-  console.log("Extension:", path.extname(file.originalname));
-  console.log("===============================");
 
   const allowedExtensions = [
     ".jpg",
@@ -38,6 +33,18 @@ const fileFilter = (req, file, cb) => {
     ".png",
     ".webp",
   ];
+  const allowedMimeTypes = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+];
+
+if (
+  allowedExtensions.includes(extension) &&
+  allowedMimeTypes.includes(file.mimetype)
+) {
+  cb(null, true);
+}
 
   const extension = path
     .extname(file.originalname)

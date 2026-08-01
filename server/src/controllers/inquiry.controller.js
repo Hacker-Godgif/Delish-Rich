@@ -8,9 +8,7 @@ import ApiError from "../utils/ApiError.js";
 
 export const createInquiry = asyncHandler(async (req, res) => {
   
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    throw new ApiError(400, "Invalid inquiry id");
-  }
+  
   const inquiry = await Inquiry.create(req.body);
 
   res.status(201).json(

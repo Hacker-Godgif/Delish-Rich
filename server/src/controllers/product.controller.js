@@ -89,22 +89,7 @@ export const getProducts = asyncHandler(async (req, res) => {
     query.featured = featured === "true";
   }
 
-  if (req.query.search) {
-  query.$or = [
-    {
-      name: {
-        $regex: req.query.search,
-        $options: "i",
-      },
-    },
-    {
-      description: {
-        $regex: req.query.search,
-        $options: "i",
-      },
-    },
-  ];
-  }
+ 
 
   const total = await Product.countDocuments(query);
 

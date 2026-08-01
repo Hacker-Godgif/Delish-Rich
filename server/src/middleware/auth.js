@@ -21,10 +21,15 @@ export const requireAdmin = asyncHandler(
 
     const token = authHeader.split(" ")[1];
 
+  try {
     const decoded = jwt.verify(
-      token,
-      process.env.JWT_SECRET
-    );
+    token,
+    process.env.JWT_SECRET
+  );
+  
+} catch {
+    throw new ApiError(401, "Invalid or expired token");
+  }
 
     const admin = await Admin.findById(
       decoded.id

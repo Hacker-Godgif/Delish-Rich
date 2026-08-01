@@ -20,7 +20,7 @@ router.get("/id/:id", getProjectById);
 router.get("/:slug", getProjectBySlug);
  
 //Admin
-router.post("/",requireAdmin,createProject);
+
 router.post("/",requireAdmin,upload.fields([
     { name: "coverImage", maxCount: 1 },
     { name: "images", maxCount: 10 },
