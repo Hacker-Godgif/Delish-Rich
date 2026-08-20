@@ -294,4 +294,4 @@ This project is licensed under the MIT License.
 
 GitHub: https://github.com/Hacker-Godgif
 
-LinkedIn: https://linkedin.com/in/yourprofile
+LinkedIn: https://linkedin.com/in/omsinha
