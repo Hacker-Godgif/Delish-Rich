@@ -11,65 +11,79 @@ function Signup() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const [accountExists, setAccountExists] =
+  useState(false);
 
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      setError("");
-      setSuccess("");
-      setLoading(true);
+  try {
+    setError("");
+    setSuccess("");
+    setAccountExists(false);
+    setLoading(true);
 
-      await signupWithEmail(
-        name,
-        email,
-        password
+    const result = await signupWithEmail(
+      name,
+      email,
+      password
+    );
+
+    console.log("Signup result:", result);
+
+    navigate("/verify-email");
+  } catch (error) {
+    console.error(
+      "Signup failed:",
+      error
+    );
+
+    if (
+      error.code ===
+      "auth/account-already-verified"
+    ) {
+      setError(
+        "This email is already registered. Please sign in using your existing account."
       );
 
-      setSuccess(
-        "Account created successfully! Welcome to Delish Rich."
+      setAccountExists(true);
+    } else if (
+      error.code ===
+      "auth/weak-password"
+    ) {
+      setError(
+        "Password should be at least 6 characters."
       );
-
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
-    } catch (error) {
-      console.error(
-        "Signup failed:",
-        error
+    } else if (
+      error.code ===
+      "auth/invalid-email"
+    ) {
+      setError(
+        "Please enter a valid email address."
       );
-
-      if (
-        error.code ===
-        "auth/email-already-in-use"
-      ) {
-        setError(
-          "An account with this email already exists."
-        );
-      } else if (
-        error.code ===
-        "auth/weak-password"
-      ) {
-        setError(
-          "Password should be at least 6 characters."
-        );
-      } else {
-        setError(error.message);
-      }
-    } finally {
-      setLoading(false);
+    } else if (
+      error.code ===
+      "auth/too-many-requests"
+    ) {
+      setError(
+        "Too many attempts. Please wait a while and try again."
+      );
+    } else {
+      setError(error.message);
     }
-  };
-
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <main className="auth-page">
       <section className="auth-card">
 
         <div className="auth-heading">
           <span className="auth-eyebrow">
-            DELISH RICH HOSPITALITY
+            DELISH RIICH HOSPITALITY
           </span>
 
           <h1>Create Account</h1>
@@ -80,11 +94,23 @@ function Signup() {
           </p>
         </div>
 
-        {error && (
+      {error && (
+        <div className="auth-error-container">
           <div className="auth-message auth-error">
             {error}
           </div>
-        )}
+
+          {accountExists && (
+            <button
+              type="button"
+              className="account-login-btn"
+              onClick={() => navigate("/login")}
+            >
+              Go to Login
+            </button>
+          )}
+        </div>
+      )}
 
         {success && (
           <div className="auth-message auth-success">

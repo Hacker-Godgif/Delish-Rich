@@ -25,6 +25,19 @@ export const firebaseLogin = asyncHandler(
         firebaseToken
       );
 
+    const provider =
+    decodedToken.firebase?.sign_in_provider;
+
+    if (
+      provider === "password" &&
+      !decodedToken.email_verified
+    ) {
+      throw new ApiError(
+        403,
+        "Please verify your email before logging in."
+      );
+    }
+
     const {
       uid,
       email,

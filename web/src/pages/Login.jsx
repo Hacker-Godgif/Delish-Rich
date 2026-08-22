@@ -16,33 +16,65 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const handleEmailLogin = async (e) => {
-    e.preventDefault();
+ const handleEmailLogin = async (e) => {
+  e.preventDefault();
 
-    try {
-      setError("");
-      setSuccess("");
-      setLoading(true);
+  try {
+    setError("");
+    setSuccess("");
+    setLoading(true);
 
-      await loginWithEmail(email, password);
+    const result = await loginWithEmail(
+      email,
+      password
+    );
 
-      setSuccess("Login successful. Welcome back!");
-
-      setTimeout(() => {
-        navigate("/");
-      }, 1200);
-    } catch (error) {
-      console.error("Login failed:", error);
-
-      setError(
-        error.code === "auth/invalid-credential"
-          ? "Invalid email or password."
-          : error.message
-      );
-    } finally {
-      setLoading(false);
+    if (result?.verificationRequired) {
+      navigate("/verify-email");
+      return;
     }
-  };
+
+    setSuccess(
+      "Login successful. Welcome back!"
+    );
+
+    setTimeout(() => {
+      navigate("/");
+    }, 1200);
+  } catch (error) {
+    console.error(
+      "Login failed:",
+      error
+    );
+
+    if (
+      error.code ===
+      "auth/invalid-credential"
+    ) {
+      setError(
+        "Invalid email or password."
+      );
+    } else if (
+      error.code ===
+      "auth/user-not-found"
+    ) {
+      setError(
+        "No account exists with this email."
+      );
+    } else if (
+      error.code ===
+      "auth/wrong-password"
+    ) {
+      setError(
+        "Invalid email or password."
+      );
+    } else {
+      setError(error.message);
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleGoogleLogin = async () => {
     try {
@@ -74,14 +106,14 @@ function Login() {
 
         <div className="auth-heading">
           <span className="auth-eyebrow">
-            DELISH RICH HOSPITALITY
+            DELISH RIICH HOSPITALITY
           </span>
 
           <h1>Welcome Back</h1>
 
           <p>
             Sign in to continue your journey
-            with Delish Rich.
+            with Delish Riich.
           </p>
         </div>
 

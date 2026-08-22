@@ -11,6 +11,10 @@ import Projects from './pages/Projects.jsx';
 import ProjectDetail from './pages/ProjectDetail.jsx';
 import Contact from './pages/Contact.jsx';
 import Admin from './pages/Admin.jsx';
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
+import VerifyEmail from "./pages/VerifyEmail";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -26,6 +30,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />}/>
+          <Route path="/verify-email" element={<VerifyEmail />}/>
+          
         </Route>
       </Routes>
     </BrowserRouter>
